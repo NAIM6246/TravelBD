@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddPlace">
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="210dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="160dp"
+        android:background="#80AEFC9A"
+        android:ems="10"
+        android:hint="@string/Add_place_name"
+        android:inputType="textPersonName"
+        android:textColorHint="#BBB4B4"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="107dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="135dp"
+        android:text="@string/Place_name"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="78dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="228dp"
+        android:text="@string/Add_desciption"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="76dp"
+        tools:layout_editor_absoluteY="184dp" />
+
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="210dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="false"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="253dp"
+        android:background="#80AEFC9A"
+        android:ems="10"
+        android:hint="@string/Add_desciption"
+        android:inputType="textPersonName"
+        android:textColorHint="#BBB4B4"
+        android:textIsSelectable="false"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="214dp"
+        />
+
+    <Button
+        android:id="@+id/Add"
+        android:layout_width="96dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="137dp"
+        android:layout_marginBottom="200dp"
+        android:background="@color/button_color"
+        android:text="@string/Add"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="432dp" />
+</RelativeLayout>

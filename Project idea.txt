@@ -1,0 +1,17 @@
+Project Name : "TRAVEL BANGLADESH"
+Project Type : Android application
+IDEA : 
+Many people is interested in travelling across the country now-a-days. But many people don't know about many tourists spot of our 
+country and sometimes people know about the spots but have no idea how to go there. Moreover sometimes people can't go for travel 
+because there of having not much people for the tour. The app "TRAVEL BANGLADESH" provides such information like tourists spot of 
+Bangladesh and infromation about the spots, how to go there and an idea of cost for the tour. The app "TRAVEL BANGLADESH" also 
+provides the facility of making groups for a tour so that people who can't go for a tour for short of people can travel with 
+others.
+
+Team number : 12
+Team Members:
+
+Name : Md. Naim Uddin Sarker
+Reg. no. : 2017831022
+Name : U Chai Aye Marma
+Reg. no. : 2017831053
