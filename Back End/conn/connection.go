@@ -45,5 +45,5 @@ func connectDB(config *config.DBConfig) error {
 }
 
 func (db *DB) Migration() {
-	db.AutoMigrate(&models.UserDomain{})
+	db.AutoMigrate(&models.UserDomain{}, &models.Place{})
 }

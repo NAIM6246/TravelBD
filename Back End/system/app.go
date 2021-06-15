@@ -24,12 +24,15 @@ func buildContainer() *dig.Container {
 
 	//handlers
 	container.Provide(handlers.NewUserHandler)
+	container.Provide(handlers.NewPlaceHandle)
 
 	//services
 	container.Provide(services.NewUserService)
+	container.Provide(services.NewPlaceService)
 
 	//repositories
 	container.Provide(repositories.NewUserRepository)
+	container.Provide(repositories.NewPlaceRepository)
 
 	container.Provide(NewServer)
 	return container
@@ -48,19 +51,22 @@ func NewSystem() {
 }
 
 type Server struct {
-	router      chi.Router
-	userHandler handlers.IUserHandler
-	dbContext   *conn.DB
+	router       chi.Router
+	userHandler  handlers.IUserHandler
+	placeHandler handlers.IPlaceHandler
+	dbContext    *conn.DB
 }
 
 func NewServer(
 	userHandler handlers.IUserHandler,
+	placeHandler handlers.IPlaceHandler,
 	dbContext *conn.DB,
 ) *Server {
 	return &Server{
-		router:      chi.NewRouter(),
-		userHandler: userHandler,
-		dbContext:   dbContext,
+		router:       chi.NewRouter(),
+		userHandler:  userHandler,
+		placeHandler: placeHandler,
+		dbContext:    dbContext,
 	}
 }
 
@@ -74,6 +80,7 @@ func (s *Server) run() {
 
 func (s *Server) mapHandlers() {
 	s.router.Route("/users", s.userHandler.Handle)
+	s.router.Route("/places/", s.placeHandler.Handle)
 }
 
 func (s *Server) dispose() {
