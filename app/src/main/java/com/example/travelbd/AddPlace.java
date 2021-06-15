@@ -51,7 +51,6 @@ public class AddPlace extends AppCompatActivity {
                           new Response.Listener<JSONObject>() {
                               @Override
                               public void onResponse(JSONObject response) {
-//                                  Toast.makeText(AddPlace.this,response.opt("name").toString(),Toast.LENGTH_LONG).show();
                                   Toast.makeText(AddPlace.this,response.toString(),Toast.LENGTH_SHORT).show();
                                   openHome();
                               }
