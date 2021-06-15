@@ -6,7 +6,7 @@
     tools:context=".AddPlace">
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/place_name"
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:layout_alignParentStart="true"
@@ -48,7 +48,7 @@
         tools:layout_editor_absoluteY="184dp" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/place_district"
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:layout_alignParentStart="true"
