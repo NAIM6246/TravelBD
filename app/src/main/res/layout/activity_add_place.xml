@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AddPlace">
 
     <EditText
@@ -11,15 +12,15 @@
         android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="10dp"
         android:background="#80AEFC9A"
         android:ems="10"
         android:hint="@string/Add_place_name"
         android:inputType="textPersonName"
         android:textColorHint="#BBB4B4"
-        tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="107dp" />
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView6"
@@ -27,12 +28,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="120dp"
         android:text="@string/Place_name"
-        android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="78dp" />
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView8"
@@ -40,12 +42,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="25dp"
         android:text="@string/Add_desciption"
-        android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="76dp"
-        tools:layout_editor_absoluteY="184dp" />
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="@+id/place_name"
+        app:layout_constraintTop_toBottomOf="@+id/place_name"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/place_district"
@@ -54,8 +56,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="false"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="253dp"
+        android:layout_marginTop="10dp"
         android:background="#80AEFC9A"
         android:ems="10"
         android:hint="@string/Add_desciption"
@@ -63,9 +64,9 @@
         android:textColorHint="#BBB4B4"
         android:textIsSelectable="false"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="214dp"
-        />
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/Add"
@@ -73,11 +74,13 @@
         android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="137dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginTop="100dp"
         android:background="@color/button_color"
         android:text="@string/Add"
         android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="432dp" />
-</RelativeLayout>
+        app:layout_constraintEnd_toEndOf="@+id/place_district"
+        app:layout_constraintStart_toStartOf="@+id/place_district"
+        app:layout_constraintTop_toBottomOf="@+id/place_district"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

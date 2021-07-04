@@ -7,7 +7,7 @@
     <string name="login">Login</string>
     <string name="password">**********</string>
     <string name="sign_in">SIGN IN</string>
-    <string name="register">Register Here...</string>
+    <string name="register">Don\'t Have an account?Register Here...</string>
     <string name="Add_place_name">Add place name</string>
     <string name="Place_name">Place name</string>
     <string name="Add_desciption">Add desciption</string>

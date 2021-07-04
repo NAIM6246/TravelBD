@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:ignore="Overdraw">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Login">
 
     <EditText
         android:id="@+id/email"
@@ -13,66 +12,81 @@
         android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="82dp"
-        android:layout_marginTop="253dp"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="100dp"
         android:background="#80AEFC9A"
-        android:textSize="16sp"
+        android:drawableStart="@drawable/ic_action_name"
         android:ems="10"
         android:hint="@string/hint1"
-        android:drawableStart="@drawable/ic_action_name"
         android:inputType="textEmailAddress"
-        tools:ignore="HardcodedText" />
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:ignore="HardcodedText,MissingConstraints" />
 
     <EditText
         android:id="@+id/pass"
         android:layout_width="231dp"
         android:layout_height="45dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="82dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="40dp"
+        android:autofillHints="@string/hint"
         android:background="#80AEff9a"
-        android:textSize="16sp"
         android:drawableStart="@drawable/ic_lock"
         android:ems="10"
         android:hint="@string/hint"
-        android:autofillHints="@string/hint"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:contentDescription="@string/logo"
         android:layout_width="125dp"
         android:layout_height="134dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="63dp"
-        android:layout_marginEnd="140dp"
-        app:srcCompat="@drawable/logo" />
+        android:contentDescription="@string/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="MissingConstraints" />
+
     <Button
+        android:id="@+id/login"
         android:layout_width="130dp"
         android:layout_height="45dp"
-        android:id="@+id/login"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="135dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/button_rounded"
         android:clickable="true"
         android:focusable="true"
         android:text="@string/login"
         android:textColor="#FFFFFF"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/pass"
+        app:layout_constraintStart_toStartOf="@+id/pass"
+        app:layout_constraintTop_toBottomOf="@+id/pass"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/registerHere"
-        android:layout_width="203dp"
+        android:layout_width="wrap_content"
         android:layout_height="47dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="29dp"
-        android:layout_marginStart="130dp"
+        android:layout_marginTop="60dp"
         android:text="@string/register"
         android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/login"
+        app:layout_constraintStart_toStartOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/login"
+        tools:ignore="MissingConstraints" />
 
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
