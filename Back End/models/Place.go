@@ -6,6 +6,7 @@ type Place struct {
 	Description string
 	District    string
 	Category    string
+	AuthorID    int
 }
 
 func PlaceTableName() string {

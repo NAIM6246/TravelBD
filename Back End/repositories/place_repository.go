@@ -8,6 +8,7 @@ import (
 type IPlaceRepository interface {
 	Create(newPlace *models.Place) (*models.Place, error)
 	GetAll() ([]*models.Place, error)
+	GetByID(id uint) (*models.Place, error)
 	GetPlaceOfDistrict(district string) ([]*models.Place, error)
 }
 
@@ -36,6 +37,14 @@ func (repo *PlaceRepository) GetAll() ([]*models.Place, error) {
 		return nil, err
 	}
 	return places, nil
+}
+
+func (repo *PlaceRepository) GetByID(id uint) (*models.Place, error) {
+	var place models.Place
+	if err := repo.db.Where("id=?", id).First(&place).Error; err != nil {
+		return nil, err
+	}
+	return &place, nil
 }
 
 func (repo *PlaceRepository) GetPlaceOfDistrict(district string) ([]*models.Place, error) {

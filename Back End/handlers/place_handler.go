@@ -55,9 +55,17 @@ func (h *PlaceHandler) getAllPlace(w http.ResponseWriter, r *http.Request) {
 	}
 	Ok(w, places)
 }
-func (h *PlaceHandler) getPlaceByID(w http.ResponseWriter, r *http.Request) {}
-func (h *PlaceHandler) updatePlace(w http.ResponseWriter, r *http.Request)  {}
-func (h *PlaceHandler) deletePlace(w http.ResponseWriter, r *http.Request)  {}
+func (h *PlaceHandler) getPlaceByID(w http.ResponseWriter, r *http.Request) {
+	id := param.UInt(r, "id")
+	place, err := h.placeService.GetByID(id)
+	if err != nil {
+		NotFound(w, err)
+		return
+	}
+	Ok(w, place)
+}
+func (h *PlaceHandler) updatePlace(w http.ResponseWriter, r *http.Request) {}
+func (h *PlaceHandler) deletePlace(w http.ResponseWriter, r *http.Request) {}
 func (h *PlaceHandler) getPlaceAccordingToDistrict(w http.ResponseWriter, r *http.Request) {
 	district := param.String(r, "district")
 	places, err := h.placeService.GetPlaceOfDistrict(district)
