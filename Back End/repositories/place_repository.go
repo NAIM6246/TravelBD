@@ -10,6 +10,7 @@ type IPlaceRepository interface {
 	GetAll() ([]*models.Place, error)
 	GetByID(id uint) (*models.Place, error)
 	GetPlaceOfDistrict(district string) ([]*models.Place, error)
+	Update(place *models.Place) (*models.Place, error)
 }
 
 type PlaceRepository struct {
@@ -53,4 +54,11 @@ func (repo *PlaceRepository) GetPlaceOfDistrict(district string) ([]*models.Plac
 		return nil, err
 	}
 	return places, nil
+}
+
+func (repo *PlaceRepository) Update(place *models.Place) (*models.Place, error) {
+	if err := repo.db.Save(place).Error; err != nil {
+		return nil, err
+	}
+	return place, nil
 }

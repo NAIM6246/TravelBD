@@ -10,6 +10,7 @@ type IPlaceService interface {
 	GetAll() ([]*models.Place, error)
 	GetByID(id uint) (*models.Place, error)
 	GetPlaceOfDistrict(district string) ([]*models.Place, error)
+	Update(id uint, place *models.Place) (*models.Place, error)
 }
 
 type PlaceService struct {
@@ -38,4 +39,16 @@ func (h *PlaceService) GetByID(id uint) (*models.Place, error) {
 
 func (h *PlaceService) GetPlaceOfDistrict(district string) ([]*models.Place, error) {
 	return h.placeRepository.GetPlaceOfDistrict(district)
+}
+
+func (h *PlaceService) Update(id uint, place *models.Place) (*models.Place, error) {
+	placeToUpdate, err := h.GetByID(id)
+	if err != nil {
+		return nil, err
+	}
+	placeToUpdate.Category = place.Category
+	placeToUpdate.Description = place.Description
+	placeToUpdate.District = place.District
+	placeToUpdate.Name = place.Name
+	return h.placeRepository.Update(placeToUpdate)
 }

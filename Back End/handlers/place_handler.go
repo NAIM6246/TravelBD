@@ -64,7 +64,21 @@ func (h *PlaceHandler) getPlaceByID(w http.ResponseWriter, r *http.Request) {
 	}
 	Ok(w, place)
 }
-func (h *PlaceHandler) updatePlace(w http.ResponseWriter, r *http.Request) {}
+func (h *PlaceHandler) updatePlace(w http.ResponseWriter, r *http.Request) {
+	id := param.UInt(r, "id")
+	place := models.Place{}
+	parsingErr := json.NewDecoder(r.Body).Decode(&place)
+	if parsingErr != nil {
+		BadRequest(w, parsingErr)
+		return
+	}
+	updatedPlace, err := h.placeService.Update(id, &place)
+	if err != nil {
+		BadRequest(w, err)
+		return
+	}
+	Ok(w, updatedPlace)
+}
 func (h *PlaceHandler) deletePlace(w http.ResponseWriter, r *http.Request) {}
 func (h *PlaceHandler) getPlaceAccordingToDistrict(w http.ResponseWriter, r *http.Request) {
 	district := param.String(r, "district")
