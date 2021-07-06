@@ -8,6 +8,7 @@ import (
 type IUserRepository interface {
 	Create(user *models.UserDomain) (*models.UserDomain, error)
 	GetAll() ([]*models.UserDomain, error)
+	GetByID(id int) (*models.UserDomain, error)
 }
 
 type UserRepository struct {
@@ -35,4 +36,12 @@ func (repo *UserRepository) GetAll() ([]*models.UserDomain, error) {
 		return nil, err
 	}
 	return users, nil
+}
+
+func (repo *UserRepository) GetByID(id int) (*models.UserDomain, error) {
+	var user models.UserDomain
+	if err := repo.db.Where("id=?", id).First(&user).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
 }

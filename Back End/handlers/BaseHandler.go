@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -53,5 +54,6 @@ func NotFound(w http.ResponseWriter, d interface{}) {
 		w.Write([]byte(`{"message" : "requested data is not found"}`))
 	} else {
 		json.NewEncoder(w).Encode(d)
+		fmt.Println(d)
 	}
 }

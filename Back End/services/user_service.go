@@ -8,6 +8,7 @@ import (
 type IUserService interface {
 	Create(user *models.UserDomain) (*models.UserDomain, error)
 	GetAll() ([]*models.UserDomain, error)
+	GetByID(id int) (*models.UserDomain, error)
 }
 
 type UserService struct {
@@ -31,4 +32,8 @@ func (h *UserService) Create(user *models.UserDomain) (*models.UserDomain, error
 }
 func (h *UserService) GetAll() ([]*models.UserDomain, error) {
 	return h.userRepository.GetAll()
+}
+
+func (h *UserService) GetByID(id int) (*models.UserDomain, error) {
+	return h.userRepository.GetByID(id)
 }

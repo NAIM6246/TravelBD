@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"travelBD/handlers/param"
 	"travelBD/models"
 	"travelBD/services"
 
@@ -26,6 +27,7 @@ func NewUserHandler(userService services.IUserService) IUserHandler {
 func (h *UserHandler) Handle(router chi.Router) {
 	router.Get("/", h.getAllUser)
 	router.Post("/", h.createUser)
+	router.Get("/{userID}", h.getUserByID)
 }
 
 func (h *UserHandler) getAllUser(w http.ResponseWriter, r *http.Request) {
@@ -44,11 +46,22 @@ func (h *UserHandler) createUser(w http.ResponseWriter, r *http.Request) {
 		BadRequest(w, parSingErr)
 		return
 	}
-	fmt.Println(user)
 	createdUser, err := h.userService.Create(&user)
 	if err != nil {
 		BadRequest(w, err)
 		return
 	}
+	fmt.Println(user)
 	Created(w, createdUser)
+}
+
+func (h *UserHandler) getUserByID(w http.ResponseWriter, r *http.Request) {
+	id := param.Int(r, "userID")
+	user, err := h.userService.GetByID(id)
+	if err != nil {
+		NotFound(w, err)
+		return
+	}
+	fmt.Println("asdf")
+	Ok(w, user)
 }
