@@ -28,6 +28,7 @@ func (h *UserHandler) Handle(router chi.Router) {
 	router.Get("/", h.getAllUser)
 	router.Post("/", h.createUser)
 	router.Get("/{userID}", h.getUserByID)
+	router.Get("/{userID}", h.updateUser)
 }
 
 func (h *UserHandler) getAllUser(w http.ResponseWriter, r *http.Request) {
@@ -56,7 +57,7 @@ func (h *UserHandler) createUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *UserHandler) getUserByID(w http.ResponseWriter, r *http.Request) {
-	id := param.Int(r, "userID")
+	id := param.UInt(r, "userID")
 	user, err := h.userService.GetByID(id)
 	if err != nil {
 		NotFound(w, err)
@@ -64,4 +65,20 @@ func (h *UserHandler) getUserByID(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println("asdf")
 	Ok(w, user)
+}
+
+func (h *UserHandler) updateUser(w http.ResponseWriter, r *http.Request) {
+	id := param.UInt(r, "userID")
+	userData := models.UserDomain{}
+	parsingErr := json.NewDecoder(r.Body).Decode(&userData)
+	if parsingErr != nil {
+		BadRequest(w, parsingErr)
+		return
+	}
+	updatedUser, err := h.userService.Update(id, &userData)
+	if err != nil {
+		BadRequest(w, err)
+		return
+	}
+	Ok(w, updatedUser)
 }

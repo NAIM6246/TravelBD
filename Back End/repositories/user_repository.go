@@ -8,7 +8,8 @@ import (
 type IUserRepository interface {
 	Create(user *models.UserDomain) (*models.UserDomain, error)
 	GetAll() ([]*models.UserDomain, error)
-	GetByID(id int) (*models.UserDomain, error)
+	GetByID(id uint) (*models.UserDomain, error)
+	Update(updatedUser *models.UserDomain) (*models.UserDomain, error)
 }
 
 type UserRepository struct {
@@ -38,10 +39,17 @@ func (repo *UserRepository) GetAll() ([]*models.UserDomain, error) {
 	return users, nil
 }
 
-func (repo *UserRepository) GetByID(id int) (*models.UserDomain, error) {
+func (repo *UserRepository) GetByID(id uint) (*models.UserDomain, error) {
 	var user models.UserDomain
 	if err := repo.db.Where("id=?", id).First(&user).Error; err != nil {
 		return nil, err
 	}
 	return &user, nil
+}
+
+func (repo *UserRepository) Update(updatedUser *models.UserDomain) (*models.UserDomain, error) {
+	if err := repo.db.Save(updatedUser).Error; err != nil {
+		return nil, err
+	}
+	return updatedUser, nil
 }
