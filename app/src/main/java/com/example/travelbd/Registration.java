@@ -23,7 +23,7 @@ import org.json.JSONObject;
 
 public class Registration extends AppCompatActivity {
     private RelativeLayout register;
-    private EditText name,username,email,pass;
+    private EditText name,username,email,pass,confirm_pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,19 +32,24 @@ public class Registration extends AppCompatActivity {
         name = findViewById(R.id.name);
         username = findViewById(R.id.username);
         pass = findViewById(R.id.password);
+        confirm_pass = findViewById(R.id.confirm_pass);
         email = findViewById(R.id.emaill);
         register.setOnClickListener(new View.OnClickListener() {
 
               @Override
               public void onClick(View v) {
+                  if (!pass.getText().toString().equals(confirm_pass.getText().toString())) {
+                      Toast.makeText(Registration.this, "password didn't match", Toast.LENGTH_SHORT).show();
+                  }
+                  else {
                   JSONObject jsonObject = new JSONObject();
                   try {
-                      jsonObject.put("name",name.getText().toString());
-                      jsonObject.put("user_name",username.getText().toString());
-                      jsonObject.put("password",pass.getText().toString());
-                      jsonObject.put("email",email.getText().toString());
-                  } catch (JSONException e){
-                      Toast.makeText(Registration.this,e.toString(),Toast.LENGTH_SHORT).show();
+                      jsonObject.put("name", name.getText().toString());
+                      jsonObject.put("user_name", username.getText().toString());
+                      jsonObject.put("password", pass.getText().toString());
+                      jsonObject.put("email", email.getText().toString());
+                  } catch (JSONException e) {
+                      Toast.makeText(Registration.this, e.toString(), Toast.LENGTH_SHORT).show();
                   }
 
                   String url = "http://192.168.0.105:8000/users/";
@@ -81,6 +86,7 @@ public class Registration extends AppCompatActivity {
                               @Override
                               public void onResponse(JSONObject response) {
                                   Toast.makeText(Registration.this, response.toString(), Toast.LENGTH_SHORT).show();
+                                  openHome();
                               }
                           },
                           new Response.ErrorListener() {
@@ -92,6 +98,7 @@ public class Registration extends AppCompatActivity {
                           }
                   );
                   requestQueue.add(jsonObjectRequest);
+              }
               }
           }
 
