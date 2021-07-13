@@ -13,6 +13,8 @@ import (
 )
 
 type IAuth interface {
+	GenerateToken(user *models.UserDomain) (string, error)
+	Authentication(handler http.Handler) http.Handler
 }
 
 const (
@@ -25,14 +27,14 @@ type Auth struct {
 	Secret string
 }
 
-func NewAuth(auth *Auth) IAuth {
+func NewAuth() IAuth {
 	return &Auth{
 		Secret: secret,
 	}
 }
 
 func (auth *Auth) GenerateToken(user *models.UserDomain) (string, error) {
-	token := jwt.New(jwt.SigningMethodES256)
+	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
 	claims[KeyUserID] = user.ID
 	claims[KeyTokenExpired] = time.Now().Add(time.Minute * 30).Unix()
@@ -58,7 +60,7 @@ func (auth *Auth) Authentication(handler http.Handler) http.Handler {
 			tokenString := extractToken()
 			token, err := jwt.Parse(tokenString, func(t *jwt.Token) (interface{}, error) {
 				if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
-					return nil, errors.New("Invalid authorization token")
+					return nil, errors.New("invalid authorization token")
 
 				}
 				return []byte(auth.Secret), nil
@@ -74,7 +76,7 @@ func (auth *Auth) Authentication(handler http.Handler) http.Handler {
 				handler.ServeHTTP(w, r)
 			} else {
 				w.WriteHeader(http.StatusUnauthorized)
-				json.NewEncoder(w).Encode(errors.New("Invalid authorization token"))
+				json.NewEncoder(w).Encode(errors.New("invalid authorization token"))
 				// return
 			}
 		} else {

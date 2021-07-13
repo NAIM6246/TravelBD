@@ -9,6 +9,7 @@ type IUserRepository interface {
 	Create(user *models.UserDomain) (*models.UserDomain, error)
 	GetAll() ([]*models.UserDomain, error)
 	GetByID(id uint) (*models.UserDomain, error)
+	GetByFilter(filter interface{}, arg ...interface{}) (*models.UserDomain, error)
 	Update(updatedUser *models.UserDomain) (*models.UserDomain, error)
 }
 
@@ -37,6 +38,14 @@ func (repo *UserRepository) GetAll() ([]*models.UserDomain, error) {
 		return nil, err
 	}
 	return users, nil
+}
+
+func (repo *UserRepository) GetByFilter(filter interface{}, arg ...interface{}) (*models.UserDomain, error) {
+	var user models.UserDomain
+	if err := repo.db.Where(filter, arg...).First(&user).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
 }
 
 func (repo *UserRepository) GetByID(id uint) (*models.UserDomain, error) {
