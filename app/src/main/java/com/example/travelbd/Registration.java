@@ -53,51 +53,52 @@ public class Registration extends AppCompatActivity {
                   }
 
                   String url = "http://192.168.0.105:8000/users/";
-//                  new ServerRequest().sendPostRequest(
-//                          getApplicationContext(),
-//                          jsonObject,
-//                          url,
-//                          new ServerResponseCallBack() {
-//                              @Override
-//                              public void onResponse(JSONObject response) {
-//                                  Toast.makeText(Registration.this,response.toString(),Toast.LENGTH_SHORT).show();
-//                              }
-//
-//                              @Override
-//                              public void onJsonArray(JSONArray jsonArray) {
-//                              }
-//
-//                              @Override
-//                              public void onError(Exception e) {
-//                                  Toast.makeText(Registration.this,e.toString(),Toast.LENGTH_SHORT).show();
-//                              }
-//                          }
-//
-//                  );
-//                  Toast.makeText(Registration.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
-//
-                  RequestQueue requestQueue = Volley.newRequestQueue(Registration.this);
-
-                  JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                          Request.Method.POST,
-                          url,
+                  new ServerRequest().sendPostRequest(
+                          getApplicationContext(),
                           jsonObject,
-                          new Response.Listener<JSONObject>() {
+                          url,
+                          new ServerResponseCallBack() {
                               @Override
                               public void onResponse(JSONObject response) {
-                                  Toast.makeText(Registration.this, response.toString(), Toast.LENGTH_SHORT).show();
+                                  Toast.makeText(Registration.this,response.toString(),Toast.LENGTH_SHORT).show();
                                   openHome();
                               }
-                          },
-                          new Response.ErrorListener() {
-                              @Override
-                              public void onErrorResponse(VolleyError error) {
-                                  Toast.makeText(Registration.this, error.toString(), Toast.LENGTH_SHORT).show();
 
+                              @Override
+                              public void onJsonArray(JSONArray jsonArray) {
+                              }
+
+                              @Override
+                              public void onError(Exception e) {
+                                  Toast.makeText(Registration.this,e.toString(),Toast.LENGTH_SHORT).show();
                               }
                           }
+
                   );
-                  requestQueue.add(jsonObjectRequest);
+                  Toast.makeText(Registration.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
+
+//                  RequestQueue requestQueue = Volley.newRequestQueue(Registration.this);
+//
+//                  JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+//                          Request.Method.POST,
+//                          url,
+//                          jsonObject,
+//                          new Response.Listener<JSONObject>() {
+//                              @Override
+//                              public void onResponse(JSONObject response) {
+//                                  Toast.makeText(Registration.this, response.toString(), Toast.LENGTH_SHORT).show();
+//                                  openHome();
+//                              }
+//                          },
+//                          new Response.ErrorListener() {
+//                              @Override
+//                              public void onErrorResponse(VolleyError error) {
+//                                  Toast.makeText(Registration.this, error.toString(), Toast.LENGTH_SHORT).show();
+//
+//                              }
+//                          }
+//                  );
+//                  requestQueue.add(jsonObjectRequest);
               }
               }
           }

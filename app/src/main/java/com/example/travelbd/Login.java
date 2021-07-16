@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -18,32 +19,43 @@ public class Login extends AppCompatActivity {
     private Button loginButton;
     private TextView register;
     TextView textView;
-    EditText usr, pas;
+    EditText email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        usr = findViewById(R.id.email);
-        pas = findViewById(R.id.pass);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.pass);
         textView = findViewById(R.id.textView);
         loginButton = findViewById(R.id.login);
         loginButton.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                  String url = "http://192.168.0.105:8000/users/";
-                  new ServerRequest().sendGetArrayRequest(
+                  JSONObject jsonObject = new JSONObject();
+                  try {
+                      jsonObject.put("email",email.getText().toString());
+                      jsonObject.put("password",password.getText().toString());
+                  } catch (JSONException e) {
+                      Toast.makeText(Login.this, e.toString(), Toast.LENGTH_SHORT).show();
+                  }
+
+                  String url = "http://192.168.0.105:8000/auth/login";
+                  new ServerRequest().sendPostRequest(
                           getApplicationContext(),
+                          jsonObject,
                           url,
                           new ServerResponseCallBack() {
                               @Override
                               public void onResponse(JSONObject jsonObject) {
+                                  Toast.makeText(Login.this,"logged in",Toast.LENGTH_SHORT).show();
+                                  Toast.makeText(Login.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
+                                  openHome();
                               }
 
                               @Override
                               public void onJsonArray(JSONArray jsonArray) {
-                                  Toast.makeText(Login.this,jsonArray.toString(),Toast.LENGTH_SHORT).show();
                               }
 
                               @Override
