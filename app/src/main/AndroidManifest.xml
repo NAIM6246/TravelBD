@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Auth_Home"></activity>
+        <activity android:name=".Bandarban"></activity>
+        <activity android:name=".Scroll_view" />
+        <activity android:name=".Auth_Home" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
