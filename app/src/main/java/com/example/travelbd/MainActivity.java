@@ -41,14 +41,6 @@ public class MainActivity extends AppCompatActivity {
           }
         );
 
-        button =  findViewById(R.id.addPlace);
-        button.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  openAddPlace();
-              }
-          }
-        );
     }
 
     public void openLogin(){
@@ -66,8 +58,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openAddPlace(){
-        Intent intent = new Intent(this,AddPlace.class);
-        startActivity(intent);
-    }
 }
