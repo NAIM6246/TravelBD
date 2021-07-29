@@ -4,18 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,6 +61,10 @@ public class Registration extends AppCompatActivity {
                               }
 
                               @Override
+                              public void onError(String me) {
+                              }
+
+                              @Override
                               public void onError(Exception e) {
                                   Toast.makeText(Registration.this,e.toString(),Toast.LENGTH_SHORT).show();
                               }
@@ -107,7 +103,7 @@ public class Registration extends AppCompatActivity {
     }
 
     public void openHome(){
-        Intent intent = new Intent(this,Home.class);
+        Intent intent = new Intent(this, Show_Place.class);
         startActivity(intent);
     }
 }
