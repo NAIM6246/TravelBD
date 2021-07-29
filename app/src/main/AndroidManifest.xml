@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Bandarban"></activity>
+        <activity android:name=".UserProfile"></activity>
+        <activity android:name=".Bandarban" />
         <activity android:name=".Scroll_view" />
         <activity android:name=".Auth_Home" />
         <activity
