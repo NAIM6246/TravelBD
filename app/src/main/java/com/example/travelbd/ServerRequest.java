@@ -19,7 +19,6 @@ import org.json.JSONObject;
 public class ServerRequest {
     public void sendPostRequest(Context context, JSONObject jsonObject, String URL, final ServerResponseCallBack serverResponseCallback) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        Toast.makeText(context,"here",Toast.LENGTH_SHORT).show();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST,
                 URL,
@@ -35,6 +34,8 @@ public class ServerRequest {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("on error", "onErrorResponse: ", error);
+                        if (error.networkResponse.statusCode == 400 )
+                            serverResponseCallback.onError("invalid credential");
                         serverResponseCallback.onError(error);
                     }
                 }
@@ -61,7 +62,7 @@ public class ServerRequest {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
-//                        serverResponseCallBack.onError(error);
+                        serverResponseCallBack.onError(error);
                     }
                 }
         );
@@ -85,7 +86,7 @@ public class ServerRequest {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
-//                        serverResponseCallBack.onError(error);
+                        serverResponseCallBack.onError(error);
                     }
                 }
         );

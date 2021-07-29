@@ -35,7 +35,7 @@ public class Auth_Home extends AppCompatActivity {
     }
 
     public void openHome(){
-        Intent intent = new Intent(this,Home.class);
+        Intent intent = new Intent(this, Show_Place.class);
         startActivity(intent);
     }
 
