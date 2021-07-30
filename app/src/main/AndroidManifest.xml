@@ -38,8 +38,7 @@
 
         <activity
             android:name=".Divisions"
-            android:label="@string/title_activity_divisions"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_divisions" />
         <activity android:name=".AddPlace" />
         <activity android:name=".Registration" />
         <activity

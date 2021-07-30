@@ -72,29 +72,6 @@ public class Registration extends AppCompatActivity {
 
                   );
                   Toast.makeText(Registration.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
-
-//                  RequestQueue requestQueue = Volley.newRequestQueue(Registration.this);
-//
-//                  JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-//                          Request.Method.POST,
-//                          url,
-//                          jsonObject,
-//                          new Response.Listener<JSONObject>() {
-//                              @Override
-//                              public void onResponse(JSONObject response) {
-//                                  Toast.makeText(Registration.this, response.toString(), Toast.LENGTH_SHORT).show();
-//                                  openHome();
-//                              }
-//                          },
-//                          new Response.ErrorListener() {
-//                              @Override
-//                              public void onErrorResponse(VolleyError error) {
-//                                  Toast.makeText(Registration.this, error.toString(), Toast.LENGTH_SHORT).show();
-//
-//                              }
-//                          }
-//                  );
-//                  requestQueue.add(jsonObjectRequest);
               }
               }
           }
@@ -105,5 +82,6 @@ public class Registration extends AppCompatActivity {
     public void openHome(){
         Intent intent = new Intent(this, Show_Place.class);
         startActivity(intent);
+        finish();
     }
 }

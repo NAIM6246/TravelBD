@@ -8,6 +8,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -34,9 +35,12 @@ public class ServerRequest {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("on error", "onErrorResponse: ", error);
-                        if (error.networkResponse.statusCode == 400 )
+                        if (error.networkResponse!= null && error.networkResponse.statusCode == 400 )
                             serverResponseCallback.onError("invalid credential");
-                        serverResponseCallback.onError(error);
+                        else if(error instanceof TimeoutError)
+                            serverResponseCallback.onError("connection timed out");
+                        else
+                            serverResponseCallback.onError(error);
                     }
                 }
         );
@@ -62,7 +66,13 @@ public class ServerRequest {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
-                        serverResponseCallBack.onError(error);
+                        if(error instanceof  TimeoutError){
+                            serverResponseCallBack.onError("connection timed out");
+                        }
+                        else if (error.networkResponse!= null && error.networkResponse.statusCode == 400 )
+                            serverResponseCallBack.onError("invalid credential");
+                        else
+                            serverResponseCallBack.onError(error);
                     }
                 }
         );
@@ -86,7 +96,13 @@ public class ServerRequest {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
-                        serverResponseCallBack.onError(error);
+                        if(error instanceof  TimeoutError){
+                            serverResponseCallBack.onError("connection timed out");
+                        }
+                        else if (error.networkResponse!= null && error.networkResponse.statusCode == 400 )
+                            serverResponseCallBack.onError("invalid credential");
+                        else
+                            serverResponseCallBack.onError(error);
                     }
                 }
         );

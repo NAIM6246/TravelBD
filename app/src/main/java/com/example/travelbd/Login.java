@@ -84,36 +84,6 @@ public class Login extends AppCompatActivity {
                                   Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
                               }
                           });
-//                  String user = usr.getText().toString();
-//                  String pass = pas.getText().toString();
-//                  ///doing here
-//                  openHome();
-                                          // Instantiate the RequestQueue.
-//                                          RequestQueue queue = Volley.newRequestQueue(Login.this);
-//                                          String url = "http://192.168.0.105:8000/users/";
-//
-//// Request a string response from the provided URL.
-//                                          JsonArrayRequest stringRequest = new JsonArrayRequest(
-//                                                  Request.Method.GET,
-//                                                  url,
-//                                                  null,
-//                                                  new Response.Listener<JSONArray>() {
-//                                                      @Override
-//                                                      public void onResponse(JSONArray response) {
-//                                                          //
-//                                                          Toast.makeText(Login.this,response.toString(),Toast.LENGTH_SHORT).show();
-//                                                      }
-//                                                  }, new Response.ErrorListener() {
-//                                              @Override
-//                                              public void onErrorResponse(VolleyError error) {
-//                                                  System.out.println(error);
-//                                                  Toast.makeText(Login.this,error.toString(),Toast.LENGTH_SHORT).show();
-//                                              }
-//                                          });
-//
-//// Add the request to the RequestQueue.
-//                                          queue.add(stringRequest);
-
               }
         });
         register = (TextView) findViewById(R.id.registerHere);
@@ -125,65 +95,11 @@ public class Login extends AppCompatActivity {
                                     }
         );
     }
-//
-//    public void  login(){
-//        JSONObject jsonObject = new JSONObject();
-//        try {
-//            jsonObject.put("email",email.getText().toString());
-//            jsonObject.put("password",password.getText().toString());
-//        } catch (JSONException e) {
-//            Toast.makeText(Login.this, e.toString(), Toast.LENGTH_SHORT).show();
-//        }
-//
-//        String url = "http://192.168.0.105:8000/auth/login";
-//        new ServerRequest().sendPostRequest(
-//                getApplicationContext(),
-//                jsonObject,
-//                url,
-//                new ServerResponseCallBack() {
-//                    @Override
-//                    public void onResponse(JSONObject jsonObject) {
-////                        Toast.makeText(Login.this,"logged in",Toast.LENGTH_SHORT).show();
-////                        Toast.makeText(Login.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
-//                        try {
-//                            if (jsonObject.getString("token").length()>0 ){
-//                                JSONObject user = jsonObject.getJSONObject("user");
-//                                //shared preferences to store token and user credential
-//                                SharedPreferences userPref = getApplication().getApplicationContext().getSharedPreferences("user",getApplicationContext().MODE_PRIVATE);
-//                                SharedPreferences.Editor editor = userPref.edit();
-//                                editor.putString("token",jsonObject.getString("token"));
-//                                editor.putString("name",user.getString("name"));
-//                                editor.putString("user_name",user.getString("user_name"));
-//                                editor.putString("email",user.getString("email"));
-//                                editor.putBoolean("isloggedIn",true);
-//                                editor.apply();
-//                                //if success
-//                                startActivity(new Intent(((Login)getApplicationContext()), Home.class));
-//                                ((Login) getApplicationContext()).finish();
-//                                Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-//                            }
-//
-//                        }catch(JSONException e){
-//
-//                        }
-//
-////                        openHome();
-//                    }
-//
-//                    @Override
-//                    public void onJsonArray(JSONArray jsonArray) {
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception e) {
-//                        Toast.makeText(Login.this,e.toString(),Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//    }
 
     public void openHome() {
         Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, Auth_Home.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
