@@ -31,6 +31,10 @@ public class Show_Place extends AppCompatActivity {
         Intent intent = new Intent(this ,Divisions.class);
         startActivity(intent);
     }
+    public void openUserProfile(){
+        Intent intent = new Intent(this,UserProfile.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,7 +46,7 @@ public class Show_Place extends AppCompatActivity {
             item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    openDivisions();
+                    openUserProfile();
                     return true;
                 }
             });
