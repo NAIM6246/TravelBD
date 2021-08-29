@@ -31,6 +31,7 @@ func (h *PlaceHandler) Handle(router chi.Router) {
 	router.Put("/{id}", h.updatePlace)
 	router.Delete("/{id}", h.deletePlace)
 	router.Get("/district/{district}", h.getPlaceAccordingToDistrict)
+	router.Get("/category/{category}", h.getPlaceByCategory)
 }
 
 func (h *PlaceHandler) createPlace(w http.ResponseWriter, r *http.Request) {
@@ -80,6 +81,7 @@ func (h *PlaceHandler) updatePlace(w http.ResponseWriter, r *http.Request) {
 	Ok(w, updatedPlace)
 }
 func (h *PlaceHandler) deletePlace(w http.ResponseWriter, r *http.Request) {}
+
 func (h *PlaceHandler) getPlaceAccordingToDistrict(w http.ResponseWriter, r *http.Request) {
 	district := param.String(r, "district")
 	places, err := h.placeService.GetPlaceOfDistrict(district)
@@ -88,4 +90,8 @@ func (h *PlaceHandler) getPlaceAccordingToDistrict(w http.ResponseWriter, r *htt
 		return
 	}
 	Ok(w, places)
+}
+
+func (h *PlaceHandler) getPlaceByCategory(w http.ResponseWriter, r *http.Request) {
+
 }

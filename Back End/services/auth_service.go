@@ -1,6 +1,7 @@
 package services
 
 import (
+	"errors"
 	"fmt"
 	"travelBD/auth"
 	"travelBD/models"
@@ -9,7 +10,7 @@ import (
 )
 
 type IAuthService interface {
-	Login(loginDto *dtos.LoginDto) (*dtos.AccessTokenDto, error)
+	Login(loginDto *dtos.LoginDto) (*dtos.LoginResponseDto, error)
 }
 
 type AuthService struct {
@@ -27,10 +28,14 @@ func NewAuthService(
 	}
 }
 
-func (that *AuthService) Login(loginDto *dtos.LoginDto) (*dtos.AccessTokenDto, error) {
+func (that *AuthService) Login(loginDto *dtos.LoginDto) (*dtos.LoginResponseDto, error) {
 	user, err := that.userRepository.GetByFilter("email=?", loginDto.Email)
 	if err != nil {
-		return nil, err
+		fmt.Println(err)
+		return nil, errors.New("this email is not registerred")
+	}
+	if user.Password != loginDto.Password {
+		return nil, errors.New("password didn't match")
 	}
 	fmt.Println(user)
 	token, err := that.auth.GenerateToken(&models.UserDomain{ID: user.ID})
@@ -38,5 +43,13 @@ func (that *AuthService) Login(loginDto *dtos.LoginDto) (*dtos.AccessTokenDto, e
 		fmt.Println(err)
 		return nil, err
 	}
-	return &dtos.AccessTokenDto{Bearer: token}, nil
+	fmt.Println("logged in")
+	return &dtos.LoginResponseDto{
+		Bearer: token,
+		User: dtos.UserDto{
+			Name:     user.Name,
+			UserName: user.UserName,
+			Email:    user.Email,
+		},
+	}, nil
 }
