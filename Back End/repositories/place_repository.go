@@ -7,6 +7,10 @@ import (
 
 type IPlaceRepository interface {
 	Create(newPlace *models.Place) (*models.Place, error)
+	GetAll() ([]*models.Place, error)
+	GetByID(id uint) (*models.Place, error)
+	GetPlaceOfDistrict(district string) ([]*models.Place, error)
+	Update(place *models.Place) (*models.Place, error)
 }
 
 type PlaceRepository struct {
@@ -26,4 +30,35 @@ func (repo *PlaceRepository) Create(newPlace *models.Place) (*models.Place, erro
 		return nil, err
 	}
 	return newPlace, nil
+}
+
+func (repo *PlaceRepository) GetAll() ([]*models.Place, error) {
+	var places []*models.Place
+	if err := repo.db.Find(&places).Error; err != nil {
+		return nil, err
+	}
+	return places, nil
+}
+
+func (repo *PlaceRepository) GetByID(id uint) (*models.Place, error) {
+	var place models.Place
+	if err := repo.db.Where("id=?", id).First(&place).Error; err != nil {
+		return nil, err
+	}
+	return &place, nil
+}
+
+func (repo *PlaceRepository) GetPlaceOfDistrict(district string) ([]*models.Place, error) {
+	var places []*models.Place
+	if err := repo.db.Where("district=?", district).Find(&places).Error; err != nil {
+		return nil, err
+	}
+	return places, nil
+}
+
+func (repo *PlaceRepository) Update(place *models.Place) (*models.Place, error) {
+	if err := repo.db.Save(place).Error; err != nil {
+		return nil, err
+	}
+	return place, nil
 }
